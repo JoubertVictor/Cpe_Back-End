@@ -1,29 +1,26 @@
-const http = require('node:http');
+//importa a biblioteca
+const express = require("express");
 
-// Create a local server to receive data from
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' });
+//starta a biblioteca
+const app = express();
 
-  if(req.url === "/cadastro"){
+//Define rota e funções que cada parte faz
+app.get("", (req, res) => {
+  return res.json({
+    message :"Hello World!"
+  })
+})
 
-   res.end(JSON.stringify({
-    data: 'Função Cadastro',
-   }));
+app.get("/cadastro", (req, res) => {
+  return res.json({
+    message: "Função de Cadastro"
+  })
+})
 
-  }
+app.get("/login", (req, res) => {
+  return res.json({
+    message: "Função de Login"
+  })
+})
 
-  if(req.url === "/login"){
-
-    res.end(JSON.stringify({
-     data: 'Função Login',
-    }));
- 
-   }
-
-  res.end(JSON.stringify({
-    data: 'Hello World!',
-   }));
-
-});
-
-server.listen(8000, () => console.log("O servidor ta aberto, eu acho"));
+app.listen(8000, () => console.log("Servidor Rodando!"));
