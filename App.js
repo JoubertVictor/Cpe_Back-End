@@ -23,4 +23,10 @@ app.get("/login", (req, res) => {
   })
 })
 
+app.get("/home", (req, res) => {
+  return res.json({
+    message: "Função de Home"
+  })
+})
+
 app.listen(8000, () => console.log("Servidor Rodando!"));
