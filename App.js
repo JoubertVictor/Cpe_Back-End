@@ -12,6 +12,14 @@ const server = http.createServer((req, res) => {
 
   }
 
+  if(req.url === "/login"){
+
+    res.end(JSON.stringify({
+     data: 'Função Login',
+    }));
+ 
+   }
+
   res.end(JSON.stringify({
     data: 'Hello World!',
    }));
