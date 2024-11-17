@@ -29,4 +29,10 @@ app.get("/home", (req, res) => {
   })
 })
 
+app.get("/seccao", (req, res) => {
+  return res.json({
+    message: "Função de Seccao"
+  })
+})
+
 app.listen(8000, () => console.log("Servidor Rodando!"));
