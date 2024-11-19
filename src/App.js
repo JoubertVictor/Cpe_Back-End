@@ -1,6 +1,6 @@
 const express = require("express");
 const rotas = require("./routes");
-const cors =requeire("cors");
+const cors =require("cors");
 
 const app = express();
 
