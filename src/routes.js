@@ -8,7 +8,7 @@ const rotas = Router();
 //USUARIOS
 rotas.post("/usuarios", UsuarioValidator.create, UsuarioController.create);
 rotas.get("/usuarios", UsuarioController.read);
-rotas.delete("/usuarios/:id", UsuarioController.delete);
+rotas.delete("/usuarios/:id",UsuarioValidator.destroy, UsuarioController.delete);
 rotas.put('/usuarios/:id', UsuarioController.update);
 
 //SESSOES

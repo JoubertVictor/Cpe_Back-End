@@ -1,13 +1,6 @@
+const { default: mongoose } = require("mongoose");
 const { z} = require("zod");
 const { validateRequest } = require("zod-express-middleware");
-
-// {
-// "email": "teste1@sjaso.com",
-// "senha": "AJnsdkan47",
-// "nome": "ELEN",
-// "cargo": "devLider",
-// "status": "Triste",
-// }
 
 const create = validateRequest({
     body: z.object({
@@ -19,6 +12,13 @@ const create = validateRequest({
     }),
 });
 
+const destroy = validateRequest({
+    params: z.object({
+        id: z.custom(mongoose.isValidObjectId, "O id não é válido"),
+    }),
+});
+
 module.exports = {
     create,
+    destroy,
 };
