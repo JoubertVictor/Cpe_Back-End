@@ -4,23 +4,47 @@ const { populate } = require("../Models/UsuarioModel");
 class SessoesController {
 
     async create(req, res){
-       const sessoes = await SessoesModel.create(req.body);
+        try {
+            
+            const sessoes = await SessoesModel.create(req.body);
+     
+            res.status(200).json(sessoes);
+            
+        } catch (error) {
 
-       return res.status(200).json(sessoes);
+            res.status(500).json({message: "Erro!", error: error.message}); //mostra a mensagem do erro,(500)})
+
+        }
     }
 
     async read(req, res){
-        const sessoess = await SessoesModel.find().populate('id_usuario', '-senha');
+        try {
 
-        return res .status(200).json(sessoess);
+            const sessoess = await SessoesModel.find().populate('id_usuario', '-senha');
+    
+            res .status(200).json(sessoess);
+            
+        } catch (error) {
+
+            res.status(500).json({message: "Erro!", error: error.message}); //mostra a mensagem do erro,(500)})
+            
+        }
     }
 
     async delete(req, res){
-         const { id } = req.params
+        try {
 
-         await SessoesModel.findByIdAndDelete(id);
+            const { id } = req.params
+   
+            await SessoesModel.findByIdAndDelete(id);
+   
+            return res.status(200).json({"mensagem": "Sessao deletado com sucesso"});
+            
+        } catch (error) {
 
-         return res.status(200).json({"mensagem": "Sessao deletado com sucesso"});
+            res.status(500).json({message: "Erro!", error: error.message}); //mostra a mensagem do erro,(500)})
+            
+        }
     }
 }
 
