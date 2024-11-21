@@ -15,10 +15,6 @@ class SessoesController {
         return res .status(200).json(sessoess);
     }
 
-    async update(req, res){
-        
-    }
-
     async delete(req, res){
          const { id } = req.params
 

@@ -4,6 +4,7 @@ const SessoesController = require("./Controllers/SessoeController");
 const UsuarioValidator = require("./Validators/UsuarioValidator");
 const SessaoValidator = require("./Validators/SessaoValidator");
 
+
 const rotas = Router();
 
 //USUARIOS
@@ -15,6 +16,6 @@ rotas.put('/usuarios/:id', UsuarioValidator.update, UsuarioController.update);
 //SESSOES
 rotas.post("/sessoes", SessaoValidator.create, SessoesController.create);
 rotas.get("/sessoes", SessoesController.read);
-rotas.delete("/sessoes/:id", SessoesController.delete);
+rotas.delete("/sessoes/:id",SessaoValidator.destroy, SessoesController.delete);
 
 module.exports = rotas;
