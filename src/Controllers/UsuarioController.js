@@ -6,8 +6,11 @@ class UsuarioController {
         try { //Capturando o erro de criar dois do msm nome, e trata lo antes de crashar o server
             
             const  usuario = await UsuarioModel.create(req.body);
+
+            // Tirando as senhas das requisições.   tira a senha e junta o resto com o objeto separado, ...novoUsuario
+            const {senha, ...novoUsuario} = usuario.toObject(); //novoUsuario tem tudo do usuario menos a senha
     
-            res.status(200).json(usuario);
+            res.status(200).json(novoUsuario);
             
         } catch (error) {
             res.status(500).json({message: "Erro!", error: error.message}); //mostra a mensagem do erro,(500)})

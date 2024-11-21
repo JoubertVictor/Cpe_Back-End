@@ -8,7 +8,10 @@ const UsuarioSchema = new Schema({
         type: String,
         unique: true,  //Isso mostra ao programa que o email deve ser único. --> P/ tem q apagar no BD e criar dnv
     },
-    senha : String,
+    senha : {
+        type: String,
+        select: false, //sempre q ter uma requisição pedindo a senha, ela nao vai ser enviada.
+    },
     nome :  {
         type: String,
         unique: true,  //Isso mostra ao programa que o nome deve ser único. --> N pode ter dois com o msm, no BD
