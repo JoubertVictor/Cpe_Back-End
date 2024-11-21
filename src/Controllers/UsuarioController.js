@@ -31,9 +31,16 @@ class UsuarioController {
     async update(req, res){
         try {
             const { id } = req.params;
-    
-            const usuario = await UsuarioModel.findByIdAndUpdate(id, req.body,{ new: true });
-    
+
+            //Vamos ver se o usuario ainda existe, pra q ai dps fazer algum update
+
+            const usuarioEncontrado = await UsuarioModel.findById(id);
+            
+            if (!usuarioEncontrado) 
+                return res.status(404).json({message: "Usuário não encontrado"});
+
+            const usuario = await usuarioEncontrado.set(req.body).save()
+
             return res.status(200).json(usuario);
             
         } catch (error) {
@@ -44,11 +51,16 @@ class UsuarioController {
 
     async delete(req, res){
         try {
-            const { id } = req.params
+            const { id } = req.params;
+
+            const usuarioEncontrado = await UsuarioModel.findById(id);
+
+            if (!usuarioEncontrado) 
+                return res.status(404).json({message: "Usuário não encontrado"});
+
+            await usuarioEncontrado.deleteOne();
     
-            await UsuarioModel.findByIdAndDelete(id);
-    
-            return res.status(200).json({"mensagem": "Usuario deletado com sucesso"});
+            res.status(200).json({mensagem: "Usuario deletado com sucesso"});
             
         } catch (error) {
             res.status(500).json({message: "Erro!", error: error.message});

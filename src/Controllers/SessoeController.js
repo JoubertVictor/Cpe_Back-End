@@ -5,7 +5,7 @@ class SessoesController {
 
     async create(req, res){
         try {
-            
+
             const sessoes = await SessoesModel.create(req.body);
      
             res.status(200).json(sessoes);
@@ -35,10 +35,15 @@ class SessoesController {
         try {
 
             const { id } = req.params
-   
-            await SessoesModel.findByIdAndDelete(id);
-   
-            return res.status(200).json({"mensagem": "Sessao deletado com sucesso"});
+            
+            const sessaoEncontrada = SessoesModel.findByIdAndDelete(id);
+
+            if(!sessaoEncontrada)
+                return res.status(404).json({ message: "Sessão não encontrada"});
+
+            await sessaoEncontrada.deleteOne();
+
+            res.status(200).json({"mensagem": "Sessao deletado com sucesso"});
             
         } catch (error) {
 
